@@ -130,7 +130,6 @@ func (loftsman *Loftsman) Ship() error {
 		return loftsman.fail(fmt.Errorf("Error ensuring that the %s namespace exists: %s", loftsman.Settings.Namespace, err))
 	}
 
-	loftsman.logger.Info().Msgf("Finding confignamp %s in namespace %s exists", shipConfigMapName, loftsman.Settings.Namespace)
 	activeConfigMap, err := loftsman.kubernetes.FindConfigMap(shipConfigMapName, loftsman.Settings.Namespace, statusKey, statusActive)
 	if err != nil {
 		return loftsman.fail(fmt.Errorf("Error determining if another loftsman ship is in progress for manifest %s: %s", loftsman.Settings.Manifest.Name, err))
